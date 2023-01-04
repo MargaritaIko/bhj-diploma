@@ -37,8 +37,6 @@ class User {
     createRequest({
       url: this.URL + '/current',
       method: 'GET',
-      responseType: 'json',
-      data: this.current(),
       callback: (err, response) => {
         if (response && response.user) {
           const user = { 
@@ -64,7 +62,6 @@ class User {
     createRequest({
       url: this.URL + '/login',
       method: 'POST',
-      responseType: 'json',
       data,
       callback: (err, response) => {
         if (response && response.user) {
@@ -85,7 +82,6 @@ class User {
     createRequest({
       url: this.URL + '/register',
       method: 'POST',
-      responseType: 'json',
       data,
       callback: (err, response) => {
         if (response && response.user) {
@@ -108,13 +104,12 @@ class User {
     createRequest({
       url: this.URL + '/logout',
       method: 'POST',
-      responseType: 'json',
-      data: this.current(),
       callback: (err, response) => {
         if (response) {
           User.unsetCurrent();
         } 
         callback(err, response);
       }
+    });
   }
 }

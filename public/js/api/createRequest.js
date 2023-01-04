@@ -11,7 +11,7 @@ const createRequest = (options = {}) => {
             Object.entries(options.data).forEach(([key, value]) => formData.append(key, value));
         }
         else {
-            formData = '';
+            formData = null;
             if (!sendURL.includes('/account')) {
                 sendURL += '?';
                 Object.entries(options.data).forEach(([key, value]) => sendURL += `${key}=${value}&`);
