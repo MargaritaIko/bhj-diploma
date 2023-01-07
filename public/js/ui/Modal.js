@@ -25,14 +25,10 @@ class Modal {
    * (с помощью метода Modal.onClose)
    * */
   registerEvents() {
-    const elementBtns = this.element.getElementsByTagName('button');
-    for (let button of elementBtns) {
-      if (button.hasAttribute('data-dismiss') && button.dataset.dismiss === 'modal') {
-        button.addEventListener('click', (ev) => {
-          ev.preventDefault();
-          this.onClose(button);
-        });
-      }
+    for (let btn of this.element.querySelectorAll('[data-dismiss="modal"]')) {
+      btn.addEventListener('click', (e) => {
+        this.onClose(e);
+      });
     }
   }
 
@@ -41,7 +37,7 @@ class Modal {
    * Закрывает текущее окно (Modal.close())
    * */
   onClose(e) {
-    e.onClick = this.close();
+    this.close();
   }
   /**
    * Открывает окно: устанавливает CSS-свойство display
