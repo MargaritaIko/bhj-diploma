@@ -36,10 +36,10 @@ class TransactionsPage {
     const deleteBtns = document.querySelector('.content-wrapper');
     deleteBtns.addEventListener('click', (ev) => {
         ev.preventDefault();
-        if (ev.target.classList.contains('remove-account')) {
+        if (ev.target.closest('remove-account')) {
           this.removeAccount();
         }
-        else if (ev.target.classList.contains('btn-danger')) {    
+        else if (ev.target.closest('btn-danger')) {    
           this.removeTransaction(ev.target.dataset.id);
         }
       });
@@ -171,9 +171,9 @@ class TransactionsPage {
    * */
   renderTransactions(data){
     const trnzList = document.querySelector('.content');
-    trnzList.innerHTML = '';
+    
     if (dataList) {
-      dataList.forEach(obj => trnzList.insertAdjacentHTML('beforeend', this.getTransactionHTML(obj)));   
+      dselect.innerHTML = response.data.reduce(obj => trnzList.insertAdjacentHTML('beforeend', this.getTransactionHTML(obj)));   
     }
     else {
       for (let element of trnzList.children) {

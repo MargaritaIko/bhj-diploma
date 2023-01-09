@@ -19,12 +19,12 @@ class CreateTransactionForm extends AsyncForm {
    * */
   renderAccountsList() {
     const modalAccList = this.element.querySelector('select.accounts-select');
-    modalAccList.innerHTML = '';
+    
     const data = User.current();  
     Account.list(data, (err, response) => { 
       if (response.success) {
-        response.data.forEach(accObj => modalAccList.insertAdjacentHTML('beforeend', 
-        `<option value="${accObj.id}">${accObj.name}</option>`))
+        select.innerHTML = response.data.reduce(accObj => modalAccList.insertAdjacentHTML('beforeend', 
+        `<option value="${accObj.id}">${accObj.name}</option>`));
       }
     });
   }
