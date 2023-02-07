@@ -40,7 +40,13 @@ class AsyncForm {
    * */
   getData() {
   const formData = new FormData(this.element);
-  return Object.fromEntries(formData.entries());
+  const formDataConversion = {};
+    
+    for (const element of formData.entries()) {
+      formDataConversion[element[0]] = element[1];
+    }
+
+    return formDataConversion;
   }
 
 

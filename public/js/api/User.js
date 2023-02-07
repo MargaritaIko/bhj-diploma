@@ -26,7 +26,7 @@ class User {
    * из локального хранилища
    * */
   static current() {
-    return JSON.parse(localStorage.getItem('user'));
+    return localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : undefined;
   }
 
   /**
@@ -39,16 +39,13 @@ class User {
       method: 'GET',
       callback: (err, response) => {
         if (response && response.user) {
-          const user = { 
-            name: response.user.name,
-            id: response.user.id
-          }
-          User.setCurrent(user);
+          this.setCurrent(response.user);
         } else {
-          User.unsetCurrent();
-        } 
+          this.unsetCurrent();
+        }
+
         callback(err, response);
-      }
+      },
     });
   }
 
@@ -85,17 +82,13 @@ class User {
       data,
       callback: (err, response) => {
         if (response && response.user) {
-          const user = { 
-            name: response.user.name,
-            id: response.user.id
-          }
-          User.setCurrent(user);
+          this.setCurrent(response.user);
         }
+
         callback(err, response);
-      }
+      },
     });
   }
-
   /**
    * Производит выход из приложения. После успешного
    * выхода необходимо вызвать метод User.unsetCurrent
@@ -105,11 +98,12 @@ class User {
       url: this.URL + '/logout',
       method: 'POST',
       callback: (err, response) => {
-        if (response) {
-          User.unsetCurrent();
-        } 
+        if (response && response.success) {
+          this.unsetCurrent();
+        }
+
         callback(err, response);
-      }
+      },
     });
   }
 }
